@@ -9,6 +9,6 @@ spec:
   # ports: Serviceが公開するポート
   ports:
     - protocol: TCP
-      port: 8080 # Serviceのポート
-      targetPort: 8080 # Podのポート
+      port: 8000 # Serviceのポート
+      targetPort: 8000 # Podのポート
   type: LoadBalancer # Serviceのタイプ

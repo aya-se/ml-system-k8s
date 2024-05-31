@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: iris
+  namespace: iris
   labels:
     app: iris
 spec:
@@ -21,7 +22,7 @@ spec:
           image: shibui/ml-system-in-actions:model_in_image_pattern_0.0.1 # コンテナのイメージ
           imagePullPolicy: Always # イメージの取得方法
           ports:
-            - containerPort: 8080 # ポート番号
+            - containerPort: 8000 # ポート番号
           resources:
             limits:
               cpu: 250m
