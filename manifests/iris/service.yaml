@@ -11,4 +11,3 @@ spec:
     - protocol: TCP
       port: 8000 # Serviceのポート
       targetPort: 8000 # Podのポート
-  type: LoadBalancer # Serviceのタイプ
