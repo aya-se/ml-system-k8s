@@ -6,7 +6,6 @@ metadata:
   labels:
     app: iris
 spec:
-  replicas: 3
   # selector：Deploymentが管理するPodを特定するためのセレクタ
   selector:
     matchLabels:
@@ -44,7 +43,7 @@ spec:
     kind: Deployment
     name: iris
   minReplicas: 1
-  maxReplicas: 6
+  maxReplicas: 3
   metrics:
     - type: Resource
       resource:
