@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris
+  namespace: iris
+spec:
+  selector:
+    app: iris
+  # ports: Serviceが公開するポート
+  ports:
+    - protocol: TCP
+      port: 8080 # Serviceのポート
+      targetPort: 8080 # Podのポート
+  type: LoadBalancer # Serviceのタイプ

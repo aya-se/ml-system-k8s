@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris
+  labels:
+    app: iris
+spec:
+  replicas: 1
+  # selector：Deploymentが管理するPodを特定するためのセレクタ
+  selector:
+    matchLabels:
+      app: iris
+  # template：Deploymentが管理するPodの設定
+  template:
+    metadata:
+      labels:
+        app: iris
+    spec:
+      containers:
+        - name: iris
+          image: shibui/ml-system-in-actions:model_in_image_pattern_0.0.1 # コンテナのイメージ
+          imagePullPolicy: Always # イメージの取得方法
+          ports:
+            - containerPort: 8080 # ポート番号
+          resources:
+            limits:
+              cpu: 250m
+              memory: 500Mi
+            requests:
+              cpu: 250m
+              memory: 500Mi
