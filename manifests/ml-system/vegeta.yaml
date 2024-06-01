@@ -17,7 +17,10 @@ spec:
       resources:
         requests:
           cpu: 1000m
-          memory: "1000Mi"
+          memory: 1Gi
+        limits:
+          cpu: 1000m
+          memory: 1Gi
       volumeMounts:
         - name: vegeta
           mountPath: "/opt/vegeta"
