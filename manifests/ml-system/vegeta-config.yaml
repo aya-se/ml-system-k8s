@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vegeta-config
+  namespace: ml-system
+data:
+  get-target: "GET http://iris.ml-system.svc.cluster.local:8000/predict/test"
+  post-target: "POST http://iris.ml-system.svc.cluster.local:8000/predict\nContent-Type: application/json \n{\"data\": {\"ndarray\": [[5.1, 3.5, 1.4, 0.2]]}}"

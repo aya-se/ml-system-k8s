@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: ml-system-k8s
+  name: ml-system-apps
   namespace: argocd
 spec:
   generators:
     - list:
         elements:
-          - path: iris
+          - path: ml-system
           - path: namespaces
           - path: argocd
   template:

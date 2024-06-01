@@ -2,5 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 # resources：デプロイするリソースの一覧
 resources:
+  - ml-system.yaml
   - argocd.yaml
-  - iris.yaml
