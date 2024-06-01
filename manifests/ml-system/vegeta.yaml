@@ -4,31 +4,25 @@ metadata:
   name: vegeta
   namespace: ml-system
 spec:
-  # template: Jobで実行するPodの設定
-  template:
-    metadata:
-      labels:
-        app: vegeta
-    spec:
-      nodeSelector:
-        cloud.google.com/gke-spot: "true"
-      containers:
+  nodeSelector:
+    cloud.google.com/gke-spot: "true"
+  containers:
+    - name: vegeta
+      image: shibui/ml-system-in-actions:load_test_pattern_client_0.0.1
+      imagePullPolicy: Always
+      command:
+        - tail
+        - -f
+        - /dev/null
+      resources:
+        requests:
+          cpu: 1000m
+          memory: "1000Mi"
+      volumeMounts:
         - name: vegeta
-          image: shibui/ml-system-in-actions:load_test_pattern_client_0.0.1
-          imagePullPolicy: Always
-          command:
-            - tail
-            - -f
-            - /dev/null
-          resources:
-            requests:
-              cpu: 1000m
-              memory: "1000Mi"
-          volumeMounts:
-            - name: vegeta
-              mountPath: "/opt/vegeta"
-              readOnly: true
-      volumes:
-        - name: vegeta
-          configMap:
-            name: vegeta-config
+          mountPath: "/opt/vegeta"
+          readOnly: true
+  volumes:
+    - name: vegeta
+      configMap:
+        name: vegeta-config
