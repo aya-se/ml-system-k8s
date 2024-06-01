@@ -7,7 +7,8 @@ spec:
   # template: Jobで実行するPodの設定
   template:
     metadata:
-      name: vegeta
+      labels:
+        app: vegeta
     spec:
       nodeSelector:
         cloud.google.com/gke-spot: "true"
