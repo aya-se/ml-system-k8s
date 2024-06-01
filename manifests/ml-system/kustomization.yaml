@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   - iris-deployment.yaml
   - iris-service.yaml
-  - iris-hpa.yaml
+  - iris-circuit-breaker.yaml
   - vegeta.yaml
   - vegeta-config.yaml

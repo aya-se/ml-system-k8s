@@ -1,0 +1,36 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: iris-circuit-breaker
+  namespace: ml-system
+spec:
+  host: iris
+  trafficPolicy:
+    loadBalancer:
+      simple: ROUND_ROBIN
+    # connectionPool：接続プールの設定
+    connectionPool:
+      tcp:
+        maxConnections: 1000 # 最大接続数
+      http:
+        http1MaxPendingRequests: 100 # 最大待ちリクエスト数
+        maxRequestsPerConnection: 100 # 1接続あたりの最大リクエスト数
+    # outlierDetection：高負荷時の切断設定
+    outlierDetection:
+      consecutive5xxErrors: 100 # 継続した障害だと判断する5xxエラーの回数
+      interval: 1s # 障害検知の間隔
+      baseEjectionTime: 10m
+      maxEjectionPercent: 10
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: iris-circuit-breaker
+  namespace: ml-system
+spec:
+  hosts:
+    - iris
+  http:
+    - route:
+        - destination:
+            host: iris
