@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - ml-system.yaml
   - argocd.yaml
+  - istio-system.yaml

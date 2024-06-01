@@ -3,3 +3,4 @@ kind: Kustomization
 # resources：デプロイするリソースの一覧
 resources:
   - applicationset.yaml
+  - istio-applicationset.yaml
