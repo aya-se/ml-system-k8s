@@ -4,8 +4,16 @@ metadata:
   name: vegeta
   namespace: ml-system
 spec:
-  nodeSelector:
-    cloud.google.com/gke-spot: "true"
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 1
+          preference:
+            matchExpressions:
+              - key: cloud.google.com/gke-spot
+                operator: In
+                values:
+                  - "true"
   containers:
     - name: vegeta
       image: shibui/ml-system-in-actions:load_test_pattern_client_0.0.1
