@@ -17,7 +17,7 @@ spec:
         maxRequestsPerConnection: 100 # 1接続あたりの最大リクエスト数
     # outlierDetection：高負荷時の切断設定
     outlierDetection:
-      consecutive5xxErrors: 100 # 継続した障害だと判断する5xxエラーの回数
+      consecutiveErrors: 100 # 連続エラー数
       interval: 1s # 障害検知の間隔
       baseEjectionTime: 10m
       maxEjectionPercent: 10

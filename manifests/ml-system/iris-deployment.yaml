@@ -15,6 +15,12 @@ spec:
     metadata:
       labels:
         app: iris
+      # annotations：Isitoのサイドカーを注入するための設定
+      annotations:
+        sidecar.istio.io/inject: "true"
+        sidecar.istio.io/proxyCPU: "128m"
+        sidecar.istio.io/proxyMemory: "128Mi"
+        proxy.istio.io/config: "{'concurrency':'4'}"
     spec:
       affinity:
         nodeAffinity:
