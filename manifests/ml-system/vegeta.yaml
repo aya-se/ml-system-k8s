@@ -1,39 +1,48 @@
-apiVersion: v1
-kind: Pod
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: vegeta
   namespace: ml-system
 spec:
-  affinity:
-    nodeAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
-        - weight: 1
-          preference:
-            matchExpressions:
-              - key: cloud.google.com/gke-spot
-                operator: In
-                values:
-                  - "true"
-  containers:
-    - name: vegeta
-      image: shibui/ml-system-in-actions:load_test_pattern_client_0.0.1
-      imagePullPolicy: Always
-      command:
-        - tail
-        - -f
-        - /dev/null
-      resources:
-        requests:
-          cpu: 1000m
-          memory: 1Gi
-        limits:
-          cpu: 1000m
-          memory: 1Gi
-      volumeMounts:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: vegeta
+  template:
+    metadata:
+      labels:
+        app: vegeta
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 1
+              preference:
+                matchExpressions:
+                  - key: cloud.google.com/gke-spot
+                    operator: In
+                    values:
+                      - "true"
+      containers:
         - name: vegeta
-          mountPath: "/opt/vegeta"
-          readOnly: true
-  volumes:
-    - name: vegeta
-      configMap:
-        name: vegeta-config
+          image: shibui/ml-system-in-actions:load_test_pattern_client_0.0.1
+          imagePullPolicy: Always
+          command:
+            - tail
+            - -f
+            - /dev/null
+          resources:
+            requests:
+              cpu: "1000m"
+              memory: "1Gi"
+            limits:
+              cpu: "1000m"
+              memory: "1Gi"
+          volumeMounts:
+            - name: vegeta
+              mountPath: "/opt/vegeta"
+              readOnly: true
+      volumes:
+        - name: vegeta
+          configMap:
+            name: vegeta-config
