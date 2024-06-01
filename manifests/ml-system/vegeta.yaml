@@ -1,5 +1,5 @@
 apiVersion: batch/v1
-kind: Job
+kind: Pod
 metadata:
   name: vegeta
   namespace: ml-system
@@ -12,8 +12,6 @@ spec:
     spec:
       nodeSelector:
         cloud.google.com/gke-spot: "true"
-      terminationGracePeriodSeconds: 25
-      restartPolicy: Never
       containers:
         - name: vegeta
           image: shibui/ml-system-in-actions:load_test_pattern_client_0.0.1
